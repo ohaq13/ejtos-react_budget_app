@@ -1,40 +1,25 @@
-
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Currency = () => {
     const {dispatch, currency} = useContext(AppContext);
 
-    const setBudget2 = (budget_val) => {
+    const changeCurrency = (cur_val) => {
         dispatch({
-            type: 'SET_BUDGET',
-            payload: +budget_val,
+            type: 'CHG_CURRENCY',
+            payload: cur_val,
         });
     };
     return (
         <div className='alert alert-secondary'>
-            <span>Budget: £
-            <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
-            <input
-                        required='required'
-                        type='number'
-                        id='budgetw'
-                        value="8"
-                        step="10"
-                        style={{ marginLeft: '2rem' , size: 10}}
-                        onChange={(event) => setBudget2(event.target.value)}>
-                        
-                        </input>
-            
+            <span>Currency: {currency} 
+      <select defaultValue={currency} className="custom-select" name="Currency" id="Currency" onChange={event=>changeCurrency(event.target.value)}>
+        <option value="$" >$ Dollar</option>
+        <option value="£" >£ Pound</option>
+        <option value="€">€ Euro</option>
+        <option value="₹">₹ Ruppee</option>
+      </select>	
+
             </span>
         </div>
     );
